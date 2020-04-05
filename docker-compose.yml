@@ -12,25 +12,15 @@ services:
   web:
     build:
       context: .
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: rails s -p 3000 -b '0.0.0.0'
     volumes:
-      - .:/app:cached
-      - /app/vendor
-      - /app/tmp
-      - /app/log
+      - ./src:/app
     ports:
       - "3000:3000"
     links:
       - db
     tty: true
     stdin_open: true
-    depends_on:
-      - db
-  data:
-    image: busybox
-    volumes:
-      - db-data:/var/lib/mysql
-    tty: true
 volumes:
   db-data:
     driver: local
