@@ -62,3 +62,8 @@ http://localhost:3000/
 - コンテナをビルド&再起動  
 `docker-compose -f docker-compose.yml build`  
 `docker-compose -f docker-compose.yml up -d`
+
+## その他
+- Bookers作成  
+`rails generate scaffold Book title:string body:text`  
+`rake db:migrate`
