@@ -12,6 +12,7 @@
 /src/tmp/*
 /src/!/log/.keep
 /src/!/tmp/.keep
+/src/vendor
 
 # Ignore uploaded files in development.
 /src/storage/*
