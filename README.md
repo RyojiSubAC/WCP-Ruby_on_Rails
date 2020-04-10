@@ -13,7 +13,7 @@
 
 ## 環境構築
 ```
-・ 新規作成する場合はsrcディレクトリを空にした状態で「プロジェクト作成」から開始  
+・ 新規作成する場合はsrcディレクトリを空にした状態（masterをcloneするでも可）で「プロジェクト作成」から開始  
 ※ Gemfile（src外にある内容を写した状態）とGemfile.lock（空）は残す
 ・ 既存のソースを利用する場合は「コンテナをビルド&起動」から開始
 ```
@@ -44,7 +44,7 @@ default: &default
 `docker-compose -f docker-compose.yml up -d`
 - MySQL V8で認証プラグイン「caching_sha2_password」をロードできないため下記で回避  
 `docker-compose exec db bash`  
-`mysql -uroot -ppassward`  
+`mysql -uroot -ppassword`  
 `ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'password';`  
 `exit`
 - DBを作成  
