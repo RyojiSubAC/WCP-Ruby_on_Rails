@@ -83,3 +83,54 @@ $ apt-get update && apt-get install -y google-chrome-stable
 $ chromedriver -v
 $ google-chrome-stable --version
 ```
+
+## deviseを使用したログイン機能作成
+
+- Gemfileを更新  
+```
+[Gemfile]
+gem 'devise'
+gem 'refile', require: 'refile/rails', github: 'manfe/refile'
+gem "refile-mini_magick"
+
+$bundle install
+```  
+- deviseインストール&Userモデル作成  
+```
+$ rails g devise:install
+$ rails g devise User name:string introduction:text profile_image_id:text
+$ rails g devise:views
+```  
+- devise設定ファイル修正  
+    - 下記を追加  
+    ```
+    [application_controller.rb]
+
+    protect_from_forgery with: :exception
+    before_action :configure_permitted_parameters, if: :devise_controller?
+
+    protected
+
+    def configure_permitted_parameters
+        added_attrs = [:email, :name, :password, :password_confirmation ]
+        devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+        devise_parameter_sanitizer.permit :account_update, keys: added_attrs
+        devise_parameter_sanitizer.permit :sign_in, keys: added_attrs
+    end
+    ```
+    - 下記を修正  
+    ```
+    [devise.rb]
+    # config.scoped_views = false [変更前]
+    config.scoped_views = true　[変更後]
+    ```
+-  アクセス制限  
+    - 対象ページのコンローラーに下記を追加  
+    `before_action :authenticate_user!`
+- 再起動不要の設定を追加  
+```
+[development.rb]
+config.cache_classes = false
+config.reload_classes_only_on_change = false
+```
+- ローカルサーバーを再起動  
