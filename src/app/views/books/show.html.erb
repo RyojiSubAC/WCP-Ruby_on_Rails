@@ -1,14 +1,26 @@
-<p id="notice"><%= notice %></p>
+<div class = "col-xs-3">
+  <%= render 'layouts/list', user: @user, book: @new_book %>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @book.body %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+<div class="col-xs-9">
+		<h2>Book detail</h2>
+		<table class="table">
+		  <tbody>
+        <tr>
+          <td>
+            <%= link_to user_path(@user), class: "user_#{@user.id}" do %>
+              <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg',fallback: "no_image.jpg", style: "width: 100px;" %><br>
+              <%= @user.name %>
+            <% end %>
+          </td>
+          <td><%= link_to @book.title, book_path(@book.id), class: "book_#{@book.id}" %></td>
+          <td><%= @book.body %></td>
+          <% if @user == current_user %>
+          <td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}"%></td>
+          <td><%= link_to "Destroy", book_path(@book), class: "btn-sm btn-danger destroy_book_#{@book.id}", method: :delete, data: {confirm: '本当に消しますか?' } %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
