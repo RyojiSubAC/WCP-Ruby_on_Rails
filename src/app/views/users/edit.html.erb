@@ -1,0 +1,40 @@
+<div class = "body">
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-md-6 col-md-ofsset-3" >
+				<h2>User info</h2>
+				<div class = "form-body">
+					<%= form_with(model: @user, local: true) do |f| %>
+						<% if @user.errors.any? %>
+						<div id="error_explanation">
+						  <h2><%= pluralize(@user.errors.count, "error") %>
+						  prohibited this @user from being saved:</h2>
+
+							<ul>
+								<% @user.errors.full_messages.each do |message| %>
+									<li><%= message %></li>
+								<% end %>
+							</ul>
+						</div>
+						<% end %>
+						<div class="field" style="margin-bottom: 10px;">
+							<%= f.label :name %>
+							<%= f.text_field :name, class: "name", id: "name"%>
+						</div>
+						<div class="field" style="margin-bottom: 10px;">
+							<%= f.label :image %>
+							<%= f.attachment_field :profile_image, class: "image" %>
+						</div>
+						<div class="field" style="margin-bottom: 10px;">
+							<%= f.label :introduction %>
+							<%= f.text_area :introduction, class: "introduction" %>
+						</div>
+						<div class="actions">
+							<%= f.submit "Update User" %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
