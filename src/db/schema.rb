@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2020_04_13_070751) do
   create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.text "body"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -32,7 +33,7 @@ ActiveRecord::Schema.define(version: 2020_04_13_070751) do
     t.string "last_sign_in_ip"
     t.string "name"
     t.text "introduction"
-    t.text "profile_image_id"
+    t.string "profile_image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
