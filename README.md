@@ -63,29 +63,11 @@ http://localhost:3000/
 `docker-compose -f docker-compose.yml build`  
 `docker-compose -f docker-compose.yml up -d`
 
-## その他
-- Bookers作成  
+## Bookers作成
 `rails generate scaffold Book title:string body:text`  
 `rake db:migrate`  
 
-- Rails + Selenium + DockerでSystemSpec環境構築  
-```
-※ rootディレクトリにいる程
-$ wget -N http://chromedriver.storage.googleapis.com/81.0.4044.69/chromedriver_linux64.zip -P
-$ unzip chromedriver_linux64.zip
-$ rm chromedriver_linux64.zip
-$ chown root:root ~/chromedriver
-$ chmod 755 ~/chromedriver
-$ mv ~/chromedriver /usr/bin/chromedriver
-$ sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
-$ sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'  
-$ apt-get update && apt-get install -y google-chrome-stable
-$ chromedriver -v
-$ google-chrome-stable --version
-```
-
 ## deviseを使用したログイン機能作成
-
 - Gemfileを更新  
 ```
 [Gemfile]
@@ -134,3 +116,22 @@ config.cache_classes = false
 config.reload_classes_only_on_change = false
 ```
 - ローカルサーバーを再起動  
+
+## Rspec
+- Rails + Selenium + DockerでSystemSpec環境構築  
+```
+※ rootディレクトリにいる程
+$ wget -N http://chromedriver.storage.googleapis.com/81.0.4044.69/chromedriver_linux64.zip -P
+$ unzip chromedriver_linux64.zip
+$ rm chromedriver_linux64.zip
+$ chown root:root ~/chromedriver
+$ chmod 755 ~/chromedriver
+$ mv ~/chromedriver /usr/bin/chromedriver
+$ sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+$ sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'  
+$ apt-get update && apt-get install -y google-chrome-stable
+$ chromedriver -v
+$ google-chrome-stable --version
+```  
+- 実行コマンド  
+`bundle exec rspec spec/ --format documentation`
