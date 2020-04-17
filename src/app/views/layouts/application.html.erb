@@ -6,10 +6,50 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://use.fontawesome.com/releases/v5.3.1/css/all.css', media: 'all', integrity: 'sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU', crossorigin: 'anonymous', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <nav>
+          <ul class="nav navbar-nav navbar-left">
+            <li>Bookers</li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+              <li><%= link_to ' Home', user_path(current_user), class: "glyphicon glyphicon-home home" %></li>
+              <li><%= link_to ' Users', users_path, class: "glyphicon glyphicon-user" %></li>
+              <li><%= link_to ' Books', books_path, class: "glyphicon glyphicon-book books" %></li>
+              <li><%= link_to ' logout', destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out" %></li>
+              <% else %>
+              <li><%= link_to ' Home', root_path, class: "glyphicon glyphicon-home home" %></li>
+              <li><%= link_to ' About', home_about_path, class: "glyphicon glyphicon-link about" %>
+              <li><%= link_to ' Sign up', new_user_registration_path, class: "glyphicon glyphicon-edit sign_up" %></li>
+              <li><%= link_to ' login', new_user_session_path, class: "glyphicon glyphicon-log-in sign_in" %></li>
+              <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="body">
+      <div class="container">
+        <div class = "row">
+          <p id = "notice"><%= notice %></p>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class = "container">
+        <div class = "row">
+          <div class = "col-xs-3 col-md-offset-9" style = "margin-left: 75%;">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
